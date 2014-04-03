@@ -18,8 +18,14 @@ module Nacre
     end
 
     def get(url)
-        connection.inspect
-        connection.get("#{@api_url}/#{url}")
+      connection.get("#{@api_url}/#{url}")
+    end
+
+    def post(url, data = {}, body = '')
+      connection.post do |req|
+        req.url "#{@api_url}/#{url}"
+        req.body  = body.to_s
+      end
     end
 
     private
