@@ -5,8 +5,8 @@
 # and more specifically here
 #   http://www.brightpearl.com/developer/latest/concept/uri-syntax.html
 ---
-id: your_brightpearl_id
-email: your_brightpearl_user_email
-password: your_brightpearl_password
-distribution_centre: eu1
+id: mumoc
+email: mumo.crls@gmail.com
+password: 220502Camubrightpearl
+distribution_centre: use
 api_version: 2.0.0
