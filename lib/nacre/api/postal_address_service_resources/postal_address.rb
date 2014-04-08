@@ -4,7 +4,7 @@ require 'active_support/inflector'
 
 module Nacre
   module API
-    class Contact < ContactServiceResource
+    class PostalAddress < ContactServiceResource
 
       def self.create(data)
         response = connection.post(url, {}, data.to_json)
@@ -19,9 +19,10 @@ module Nacre
       end
 
       def self.url
-        service_url + '/contact'
+        service_url + '/postal-address'
       end
 
     end
   end
 end
+
