@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Nacre::API::Contact do
-  let(:response_json) { IO.read('spec/fixtures/json/contact_post.json') }
+describe Nacre::API::PostalAddress do
+  let(:response_json) { IO.read('spec/fixtures/json/postal_address_post.json') }
 
   let(:response) do
     response = double('response')
@@ -16,13 +16,14 @@ describe Nacre::API::Contact do
   end
 
   before do
-    Nacre::API::Contact.stub(:connection).and_return(connection)
+    Nacre::API::PostalAddress.stub(:connection).and_return(connection)
   end
 
   describe '.create' do
     it 'returns the contact id' do
-      described_class.create({}).should eq({ id: 154 })
+      described_class.create({}).should eq({ id: 200 })
     end
   end
 end
+
 
