@@ -30,6 +30,12 @@ module Nacre
         connection.post(post_url, {}, body)
       end
 
+      def self.product_resoure(url)
+        new(url, 'product.created').set_hook
+        new(url + '/${resource-id}', 'product.modified').set_hook
+        new(url + '/${resource-id}', 'product.destroyed', 'DELETE', false).set_hook
+      end
+
       private
 
       def body
