@@ -22,21 +22,31 @@ module Nacre
         @body_template = body_template ? default_body_template : ''
       end
 
-      def default_body_template
-        "{\"accountCode\": \"${account-code}\",\"resourceType\": \"${resource-type}\",\"id\": \"${resource-id}\",\"lifecycle-event\": \"${lifecycle-event}\",\"full-event\": \"${full-event}\"}"
-      end
-
       def set_hook
         connection.post(post_url, {}, body)
       end
 
-      def self.product_resoure(url)
+      def self.product_resource(url)
         new(url, 'product.created').set_hook
         new(url + '/${resource-id}', 'product.modified').set_hook
         new(url + '/${resource-id}', 'product.destroyed', 'DELETE', false).set_hook
       end
 
+      def all
+        connection.get(post_url)
+      end
+
+      def self.all
+        response = new('', '').all
+
+        JSON.parse(response.body)['response']
+      end
+
       private
+
+      def default_body_template
+        "{\"accountCode\": \"${account-code}\",\"resourceType\": \"${resource-type}\",\"id\": \"${resource-id}\",\"lifecycle-event\": \"${lifecycle-event}\",\"full-event\": \"${full-event}\"}"
+      end
 
       def body
         {
