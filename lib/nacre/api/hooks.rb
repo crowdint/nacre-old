@@ -28,7 +28,7 @@ module Nacre
 
       def self.product_resource(url)
         new(url, 'product.created').set_hook
-        new(url + '/${resource-id}', 'product.modified').set_hook
+        new(url + '/${resource-id}', 'product.modified', 'PUT').set_hook
         new(url + '/${resource-id}', 'product.destroyed', 'DELETE', false).set_hook
       end
 
