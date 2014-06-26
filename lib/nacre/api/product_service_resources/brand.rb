@@ -28,6 +28,10 @@ module Nacre
       def self.url
         service_url + "/brand"
       end
+
+      def self.search_url
+        self.url
+      end
     end
   end
 end
