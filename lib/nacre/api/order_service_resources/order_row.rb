@@ -8,7 +8,7 @@ module Nacre
 
       def self.create(order_id, data)
         @order_id = order_id
-        response = connection.post(url, {}, data.to_json)
+        response = connection.post(url, {"content-type"=>"application/json"}, data.to_json)
         json_response = JSON.parse(response.body)
         { id: json_response['response'] }
       end
