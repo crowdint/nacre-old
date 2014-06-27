@@ -11,6 +11,12 @@ module Nacre
         :description
       ]
 
+      def self.create(data)
+        response = connection.post(url, {"content-type"=>"application/json"}, data.to_json)
+        json_response = JSON.parse response.body
+        { id: json_response['response'] }
+      end
+
       def self.fields
         FIELDS.map(&:to_s).map(&:underscore).map(&:to_sym)
       end
@@ -27,10 +33,6 @@ module Nacre
 
       def self.url
         service_url + "/brand"
-      end
-
-      def self.search_url
-        self.url
       end
     end
   end
