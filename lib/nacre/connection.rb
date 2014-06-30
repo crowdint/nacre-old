@@ -28,7 +28,7 @@ module Nacre
       end
     end
 
-    def post(url, data = {}, body = '')
+    def put(url, data = {}, body = '')
       connection.put do |req|
         req.url "#{@api_url}/#{url}"
         req.body  = body.to_s
