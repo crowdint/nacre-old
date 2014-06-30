@@ -23,7 +23,6 @@ module Nacre
 
       def self.create(data)
         response = connection.post(url, {"content-type"=>"application/json"}, data.to_json)
-        binding.pry
         json_response = JSON.parse(response.body)
         { id: json_response['response'] }
       end
