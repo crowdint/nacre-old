@@ -10,6 +10,10 @@ module Nacre
         :priceLists
       ]
 
+      def self.update(data, product_id)
+        connection.put(update_url(product_id), {"content-type"=>"application/json"}, data.to_json)
+      end
+
       def self.fields
         FIELDS.map(&:to_s).map(&:underscore).map(&:to_sym)
       end
@@ -23,6 +27,10 @@ module Nacre
       end
 
       private
+
+      def self.update_url(product_id)
+        service_url + "/product-price/#{product_id}/price-list"
+      end
 
       def self.url
         service_url + "/product-price"
