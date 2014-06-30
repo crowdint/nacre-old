@@ -21,6 +21,13 @@ module Nacre
         raise NotImplementedError.new("Child class must implement #{method_name}")
       end
 
+      def self.create(data)
+        response = connection.post(url, {"content-type"=>"application/json"}, data.to_json)
+        binding.pry
+        json_response = JSON.parse(response.body)
+        { id: json_response['response'] }
+      end
+
       private
 
       def self.url
