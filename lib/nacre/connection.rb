@@ -28,6 +28,13 @@ module Nacre
       end
     end
 
+    def put(url, data = {}, body = '')
+      connection.put do |req|
+        req.url "#{@api_url}/#{url}"
+        req.body  = body.to_s
+      end
+    end
+
     private
 
     def token= token_string
