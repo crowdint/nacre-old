@@ -2,20 +2,13 @@ require 'psych'
 
 module Nacre
   class Config
-
-    REQUIRED = [:email, :id, :password, :distribution_centre, :api_version, :file]
-
-    REQUIRED.each do |attr|
-      attr_accessor attr
-    end
-
-    attr_accessor :base_url
+    attr_accessor :email, :id, :password, :distribution_centre, :api_version, :file, :base_url
 
     def initialize(args)
       @base_url = args[:base_url]
 
       filename = args[:file]
-      if !!filename
+      if filename
           if File.exists?(filename)
             self.file = filename
             load_file filename
@@ -23,9 +16,10 @@ module Nacre
             raise "File not found"
           end
       end
+
       load_values args
 
-      REQUIRED.each do |field|
+      [:email, :id, :password, :distribution_centre, :api_version].each do |field|
         raise "#{field.to_s} required" unless has_been_set? field
       end
     end
@@ -56,6 +50,7 @@ module Nacre
       hash.each do |key,value|
         self.send "#{key.to_s}=", value
       end
+
       return true
     end
 

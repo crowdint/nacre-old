@@ -3,11 +3,8 @@ require 'json'
 require 'active_support/inflector'
 
 module Nacre
-
   module API
-
     class ServiceResource
-
       def self.connection
           Nacre::Api.global_instance.connection
       end
@@ -22,6 +19,12 @@ module Nacre
 
       def self.search
         raise NotImplementedError.new("Child class must implement #{method_name}")
+      end
+
+      def self.create(data)
+        response = connection.post(url, {"content-type"=>"application/json"}, data.to_json)
+        json_response = JSON.parse(response.body)
+        { id: json_response['response'] }
       end
 
       private
@@ -59,9 +62,6 @@ module Nacre
           self.public_send "#{field.to_s}=", values[field.to_s.camelize(:lower)].to_openstruct
         end
       end
-
     end
-
   end
-
 end

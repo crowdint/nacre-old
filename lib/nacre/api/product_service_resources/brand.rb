@@ -3,15 +3,12 @@ require 'json'
 require 'active_support/inflector'
 
 module Nacre
-
   module API
-
-    class Product < ProductServiceResource
-
+    class Brand < ProductServiceResource
       FIELDS = [
-        :id, :brandId, :productTypeId, :identity,
-        :productGroupId, :stock, :financialDetails,
-        :salesChannels, :composition, :variations
+        :id,
+        :name,
+        :description
       ]
 
       def self.create(data)
@@ -35,11 +32,7 @@ module Nacre
       private
 
       def self.url
-        service_url + "/product"
-      end
-
-      def self.search_url
-        service_url + '/product-search'
+        service_url + "/brand"
       end
     end
   end

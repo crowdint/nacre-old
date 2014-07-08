@@ -116,9 +116,20 @@ describe Nacre::API::Order do
         end
       end
     end
-
-    describe "save"
-
-    describe "delete"
+  end
+  
+  describe "self.create" do
+    let(:response_json) { IO.read("spec/fixtures/json/order_post.json") }
+    
+    it "should return order ID" do
+      response = double("response")
+      response.stub(:body).and_return(response_json)
+      connection.should_receive(:post).
+        with("/order-service/order", {"content-type"=>"application/json"}, "{}").
+        and_return(response)
+      
+      order_response = Nacre::API::Order.create({})
+      order_response[:id].should == 123
+    end
   end
 end
