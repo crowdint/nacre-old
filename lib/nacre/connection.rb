@@ -17,6 +17,10 @@ module Nacre
       self.token = auth['response']
     end
 
+    def delete(url)
+      connection.delete("#{@api_url}/#{url}")
+    end
+
     def get(url)
       connection.get("#{@api_url}/#{url}")
     end
