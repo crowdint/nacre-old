@@ -15,6 +15,7 @@ module Nacre
         :reference,
         :acknowledged,
         :orderStatus,
+        :orderPaymentStatus,
         :stockStatusCode,
         :allocationStatusCode,
         :placedOn,
