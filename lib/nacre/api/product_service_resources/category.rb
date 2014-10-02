@@ -4,7 +4,7 @@ require 'active_support/inflector'
 
 module Nacre
   module API
-    class Category < ProductServiceResource
+    class Category < CategoryServiceResource
       FIELDS = [
           :id,
           :name,
